@@ -52,6 +52,11 @@ GEM
       activemodel
     erubis (2.7.0)
     execjs (2.7.0)
+    factory_girl (4.8.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.8.0)
+      factory_girl (~> 4.8.0)
+      railties (>= 3.0.0)
     ffi (1.9.18)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
@@ -73,6 +78,9 @@ GEM
     mime-types-data (3.2016.0521)
     mini_portile2 (2.1.0)
     minitest (5.10.1)
+    minitest-rails (3.0.0)
+      minitest (~> 5.8)
+      railties (~> 5.0)
     mysql2 (0.4.5)
     nio4r (2.0.0)
     nokogiri (1.7.1)
@@ -144,8 +152,10 @@ PLATFORMS
 DEPENDENCIES
   byebug
   clearance (~> 1.15.1)
+  factory_girl_rails
   jquery-rails
   listen (~> 3.0.5)
+  minitest-rails
   mysql2 (>= 0.3.18, < 0.5)
   nokogiri (= 1.7.1)
   puma (~> 3.0)
