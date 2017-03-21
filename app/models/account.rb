@@ -5,6 +5,7 @@ class Account < ApplicationRecord
   validates :user, presence: true
   validates :balance, presence: true
 
+  private
   def init_balance
     self.balance ||= 500
   end
