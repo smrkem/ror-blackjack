@@ -12,8 +12,11 @@ describe Account do
       account.errors[:user].must_include "can't be blank"
     end
 
-    it "requires a balance" do
-      account.errors[:balance].must_include "can't be blank"
+    it "initializes a default balance" do
+      account.user = create(:user)
+      account.save
+
+      assert_equal 500, account.balance
     end
   end
 end
