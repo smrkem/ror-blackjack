@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  mindfulness: 1
+  physically_active: 1
+  happiness: 1
+  diet: 1
+  mentally_active: 1
+  socially_active: 1
+
+two:
+  mindfulness: 1
+  physically_active: 1
+  happiness: 1
+  diet: 1
+  mentally_active: 1
+  socially_active: 1

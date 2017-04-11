@@ -1,0 +1,28 @@
+<h1>HealthStatus Report</h1>
+<div class="range-selector">
+  <button id="range_5_days_button" type="button" class="btn btn-primary range_button" data-range="5 days">5 Days</button>
+  <button id="range_1_month_button" type="button" class="btn btn-primary btn-success range_button" data-range="1 month">1 Month</button>
+  <button id="range_3_months_button" type="button" class="btn btn-primary range_button" data-range="3 months">3 Months</button>
+  <button id="range_1_year_button" type="button" class="btn btn-primary range_button" data-range="1 year">1 Year</button>
+</div>
+<div id="status_graph_wr">
+  <canvas id="status_graph"></canvas>
+  <div id="status_graph_legend">
+    <label class="show-mindfulness">Mindfulness <input type="checkbox" value="mindfulness" name="dataset" data-color="rgba(255, 0, 255, 0.5)" checked=true></label>
+    <label class="show-physical_activity">Physical Activity <input type="checkbox" value="physically_active" name="dataset" data-color="rgba(0, 0, 255, 0.5)" checked=true></label>
+    <label class="show-happiness">Happiness <input type="checkbox" value="happiness" name="dataset" data-color="rgba(255, 0, 0, 0.5)" checked=true></label>
+    <label class="show-diet">Diet <input type="checkbox" value="diet" name="dataset" data-color="rgba(255, 255, 0, 0.5)" checked=true></label>
+    <label class="show-mental_activity">Mental Activity <input type="checkbox" value="mentally_active" name="dataset" data-color="rgba(0, 255, 55, 0.5)" checked=true></label>
+    <label class="show-social_activity">Social Activity <input type="checkbox" value="socially_active" name="dataset" data-color="rgba(255, 200, 55, 0.5)" checked=true></label>
+  </div>
+</div>
+
+<hr>
+<h2>Status History</h2>
+<% @health_status_months.each do |month, health_statuses| %>
+  <div class="status-history-period">
+    <h3><%= month.strftime("%B %Y") %></h3>
+    <div class="status-history-statuses">
+      <%= render health_statuses %>
+    </div>
+<% end %>

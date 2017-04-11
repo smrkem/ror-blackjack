@@ -1,0 +1,9 @@
+$("#modal").fadeOut('fast', function() {
+  $("#modal-content").empty();
+});
+$("#<%= dom_id(@health_status) %>")
+  .attr('id', 'removing')
+  .after("<%= escape_javascript(render partial: 'health_status', locals: { health_status: @health_status }) %>");
+$("#removing").remove();
+
+getHealthStatusData($(".range-selector .btn-success").data('range'));

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Trackme</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+
+  <body>
+    <header class="container">
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <%= link_to "TrackMe", root_path, class: "navbar-brand" %>
+          </div>
+
+          <ul class="nav navbar-nav navbar-right">
+            <% if signed_in? %>
+              <li><p style="padding: 15px;"><%= current_user.email %></p></li>
+              <li><%= link_to "Status Report", health_statuses_path %></li>
+              <li><%= link_to 'Sign out', sign_out_path, method: :delete %></li>
+            <% else %>
+                <li><%= link_to 'Sign in', sign_in_path unless controller_name == 'sessions' %></li>
+            <% end %>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <section class="container">
+      <div id="flash">
+        <% flash.each do |key, value| %>
+          <div class="flash alert <%= alert_class(key) %>"><%= value %></div>
+        <% end %>
+      </div>
+      <%= yield %>
+    </section>
+    <div id="modal">
+      <div id="modal-content"></div>
+      <div id="modal-background"></div>
+    </div>
+  </body>
+</html>
