@@ -1,24 +1,19 @@
-# README
+## TrackMe
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A rails app to track different personal status attributes over time.
+- Mindfulness
+- Physical Activity
+- Happiness
+- Diet
+- Mental Activity
+- Social Activity
 
-Things you may want to cover:
+The initial model is a HealthStatus where each of the above attributes is recorded on a scale of 0 to 10.  
 
-* Ruby version
 
-* System dependencies
+The app:
+- displays attribute history over time on a 5 day, 1 month, 3 months and 1 yr range
+- allows ajax editing and deleting of previous HealthStatus records
 
-* Configuration
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Built with model, controller and integration tests (TDD).  
