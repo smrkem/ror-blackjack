@@ -1,0 +1,15 @@
+<div class="health_status" id="<%= dom_id(health_status) %>">
+  <div class="health_status_created_at"><%= health_status.created_at.strftime("%A %b %e, %l:%M %P") %></div>
+  <div class="health_status_statuses">
+    <div class="mindfulness_status status-<%= health_status.mindfulness %>"></div>
+    <div class="physically_active_status status-<%= health_status.physically_active %>"></div>
+    <div class="happiness_status status-<%= health_status.happiness %>"></div>
+    <div class="diet_status status-<%= health_status.diet %>"></div>
+    <div class="mentally_active_status status-<%= health_status.mentally_active %>"></div>
+    <div class="socially_active_status status-<%= health_status.socially_active %>"></div>
+  </div>
+  <div class="actions">
+    <%= link_to "Edit", edit_health_status_path(health_status), class: "btn btn-default", remote: true %>
+    <%= link_to "Delete", health_status, class: "btn btn-default", remote: true, method: :delete %>
+  </div>
+</div>
