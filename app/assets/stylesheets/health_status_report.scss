@@ -5,6 +5,13 @@ $diet-color: rgba(255, 255, 0, 1);
 $mentally-active-color: rgba(0, 255, 55, 1);
 $socially-active-color: rgba(255, 200, 55, 1);
 
+$mindfulness-color-semi: rgba(255, 0, 255, 0.3);
+$physically-active-color-semi: rgba(0, 0, 255, 0.2);
+$happiness-color-semi: rgba(255, 0, 0, 0.3);
+$diet-color-semi: rgba(255, 255, 0, 0.3);
+$mentally-active-color-semi: rgba(0, 255, 55, 0.3);
+$socially-active-color-semi: rgba(255, 200, 55, 0.3);
+
 #modal {
   position: fixed;
   z-index: 100;
@@ -35,6 +42,42 @@ $socially-active-color: rgba(255, 200, 55, 1);
   z-index: 120;
 }
 
+
+
+
+/* Health Status Form */
+form.edit_health_status,
+form.new_health_status {
+  .form-group {
+    padding: 5px;
+  }
+
+  .range-wr {
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+  }
+
+  .mindfulness-form-group .range-wr {
+    background: $mindfulness-color-semi;
+  }
+  .physically_active-form-group .range-wr {
+    background: $physically-active-color-semi;
+  }
+  .happiness-form-group .range-wr {
+    background: $happiness-color-semi;
+  }
+  .diet-form-group .range-wr {
+    background: $diet-color-semi;
+  }
+  .mentally_active-form-group .range-wr {
+    background: $mentally-active-color-semi;
+  }
+  .socially_active-form-group .range-wr {
+    background: $socially-active-color-semi;
+  }
+}
+
 .range-selector {
   padding: 10px 0;
   text-align: center;
@@ -44,6 +87,12 @@ $socially-active-color: rgba(255, 200, 55, 1);
   width: 20%;
 }
 
+
+
+
+
+
+/* Status Report */
 #status_graph_wr {
   width: 100%;
 }
@@ -52,7 +101,6 @@ $socially-active-color: rgba(255, 200, 55, 1);
   background: #000;
   border: 1px solid #666;
 }
-
 
 #status_graph_legend {
   padding: 10px;
@@ -102,6 +150,10 @@ label.show-social_activity::before {
   background: $socially-active-color;
 }
 
+
+
+
+/* Health Statuses listed on #index */
 .status-history-period h3 {
   cursor: pointer;
 }
@@ -111,6 +163,8 @@ label.show-social_activity::before {
   transition: height 0.3s ease;
 }
 
+
+/* Health Status */
 .health_status {
   overflow: hidden;
   height: 60px;
