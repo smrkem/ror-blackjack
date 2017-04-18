@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'karlos/index'
-
   root to: "health_statuses#new"
   resources :health_statuses
 

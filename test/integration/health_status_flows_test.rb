@@ -5,11 +5,6 @@ class HealthStatusFlowsTest < ActionDispatch::IntegrationTest
     @user = User.create!(email: "test_user_1@example.com", password: "password", password_confirmation: "password")
   end
 
-  test "homepage redirects to signin page" do
-    get root_path
-    assert_redirected_to sign_in_path
-  end
-
   test "can input a status on the homepage" do
     get root_path(as: @user)
     assert_response :success
