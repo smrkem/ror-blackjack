@@ -34,7 +34,7 @@ class HealthStatusFlowsTest < ActionDispatch::IntegrationTest
   end
 
   test "redirects to report after create" do
-    post health_statuses_path as: @user, params: health_status_params
+    post health_statuses_path(as: @user), params: health_status_params
     assert_redirected_to health_statuses_path
     follow_redirect!
     assert_response :success
