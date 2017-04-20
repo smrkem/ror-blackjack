@@ -44,7 +44,7 @@ class UserAuthenticationFlowsTest < ActionDispatch::IntegrationTest
     assert ActionMailer::Base.deliveries.empty?
 
     post users_path, params: { user: { email: "test@example.com", password: "password", password_confirmation: "password" } }
-    assert_response :redirect
+    assert_response :success
 
     assert_equal false, ActionMailer::Base.deliveries.empty?
     assert_equal "Email confirmation has been sent.", flash[:notice]

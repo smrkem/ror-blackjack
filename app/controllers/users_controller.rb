@@ -6,7 +6,7 @@ class UsersController < Clearance::UsersController
     if @user.save
       UserMailer.registration_confirmation(@user).deliver_later
       flash[:notice] = "Email confirmation has been sent."
-      redirect_back_or url_after_create
+      render template: "users/confirmation_email_sent"
     else
       render template: "users/new"
     end
