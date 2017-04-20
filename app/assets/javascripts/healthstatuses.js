@@ -40,7 +40,7 @@ $( function() {
 
 });
 
-function getHealthStatusData(start_date='1 month') {
+function getHealthStatusData(start_date) {
   $.ajax({
     type: 'GET',
     url: 'health_statuses',
