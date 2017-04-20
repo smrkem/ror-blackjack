@@ -2,7 +2,7 @@ require 'test_helper'
 
 class HealthStatusFlowsTest < ActionDispatch::IntegrationTest
   setup do
-    @user = User.create!(email: "test_user_1@example.com", password: "password", password_confirmation: "password")
+    @user = User.create!(email: "test_user_1@example.com", password: "password", password_confirmation: "password",  email_confirmed_at: Time.now)
   end
 
   test "can input a status on the homepage" do
