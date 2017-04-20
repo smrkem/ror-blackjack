@@ -2,7 +2,7 @@ require 'test_helper'
 
 class HealthStatusesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @user = User.create!(email: "test_user_1@example.com", password: "password", password_confirmation: "password")
+    @user = User.create!(email: "test_user_1@example.com", password: "password", password_confirmation: "password",  email_confirmed_at: Time.now)
     @health_status = health_statuses(:one)
     @health_status.user = @user
     @health_status.save

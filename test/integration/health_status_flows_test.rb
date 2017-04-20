@@ -2,7 +2,7 @@ require 'test_helper'
 
 class HealthStatusFlowsTest < ActionDispatch::IntegrationTest
   setup do
-    @user = User.create!(email: "test_user_1@example.com", password: "password", password_confirmation: "password")
+    @user = User.create!(email: "test_user_1@example.com", password: "password", password_confirmation: "password",  email_confirmed_at: Time.now)
   end
 
   test "can input a status on the homepage" do
@@ -34,7 +34,7 @@ class HealthStatusFlowsTest < ActionDispatch::IntegrationTest
   end
 
   test "redirects to report after create" do
-    post health_statuses_path as: @user, params: health_status_params
+    post health_statuses_path(as: @user), params: health_status_params
     assert_redirected_to health_statuses_path
     follow_redirect!
     assert_response :success
