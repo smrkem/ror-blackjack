@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   root to: "health_statuses#new"
+
+  resources :goals
   resources :health_statuses
 
   resources :users, controller: :users, only: :create
