@@ -12,7 +12,7 @@ class UserMailerTest < ActionMailer::TestCase
       email.deliver_now
     end
 
-    assert_equal ['no-reply@mattsmrke.me', email.from]
+    assert_equal ['no-reply@mattsmrke.me'], email.from
     assert_equal [@user.email], email.to
     assert_equal 'Please verify your email address on TrackMe', email.subject
   end

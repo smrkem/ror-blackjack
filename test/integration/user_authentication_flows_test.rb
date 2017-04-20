@@ -1,5 +1,12 @@
 require 'test_helper'
 
+# monkey patch deliver_later in test.
+class ActionMailer::MessageDelivery
+  def deliver_later
+    deliver_now
+  end
+end
+
 class UserAuthenticationFlowsTest < ActionDispatch::IntegrationTest
   setup do
     @user = User.create!(email: "test_user_1@example.com", password: "password", password_confirmation: "password", email_confirmed_at: Time.now)
@@ -40,7 +47,7 @@ class UserAuthenticationFlowsTest < ActionDispatch::IntegrationTest
     assert_response :redirect
 
     assert_equal false, ActionMailer::Base.deliveries.empty?
-    assert_select "p", "Email confirmation has been sent."
+    assert_equal "Email confirmation has been sent.", flash[:notice]
   end
 
 end
