@@ -10,15 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170420224310) do
+ActiveRecord::Schema.define(version: 20170422001827) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "goal_activities", force: :cascade do |t|
+    t.datetime "performed_at"
+    t.integer  "goal_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["goal_id"], name: "index_goal_activities_on_goal_id", using: :btree
+  end
+
   create_table "goals", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.float    "frequency"
+    t.integer  "frequency"
     t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
@@ -51,6 +59,7 @@ ActiveRecord::Schema.define(version: 20170420224310) do
     t.index ["remember_token"], name: "index_users_on_remember_token", using: :btree
   end
 
+  add_foreign_key "goal_activities", "goals"
   add_foreign_key "goals", "users"
   add_foreign_key "health_statuses", "users"
 end
