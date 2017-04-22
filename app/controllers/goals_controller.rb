@@ -19,6 +19,16 @@ class GoalsController < ApplicationController
     end
   end
 
+  def show
+    @goal = current_user.goals.find(params[:id])
+  end
+
+  def destroy
+    @goal = current_user.goals.find(params[:id]).destroy
+    flash[:notice] = "#{@goal.name} has been removed."
+    redirect_to goals_path
+  end
+
   private
   def goal_params
     params.require(:goal).permit(:name, :frequency, :description)

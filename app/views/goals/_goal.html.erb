@@ -1,4 +1,6 @@
 <li class="goal">
-  <span class="goal-name"><%= goal.name %></span>
-  <span class="goal-frequency"><%= number_to_human(goal.frequency) %> times per week</span>
+  <%= link_to goal do %>
+    <span class="goal-name"><%= goal.name %></span>
+    <span class="goal-frequency"><%= number_to_human(goal.frequency) %> times per week</span>
+  <% end %>
 </li>

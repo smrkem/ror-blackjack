@@ -1,5 +1,6 @@
 class Goal < ApplicationRecord
   belongs_to :user
+  has_many :goal_activities, dependent: :destroy
 
   validates :name, presence: true, uniqueness: { scope: :user }
   validates :frequency, presence: true,

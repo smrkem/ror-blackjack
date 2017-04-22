@@ -1,0 +1,3 @@
+<h1>Goal: <%= @goal.name %></h1>
+<h3><em><%= @goal.frequency %> times per week</em></h3>
+<p><%= link_to "Delete Goal", @goal, method: :delete, data: {confirm: "Are you sure you want to permanently remove the #{@goal.name} goal?"} %></p>
