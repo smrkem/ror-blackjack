@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
-  root to: "health_statuses#new"
+  root to: "goals#index"
 
-  resources :goals
+  resources :goals do
+    post 'complete_now', on: :member
+    resources :goal_activities, only: [:new, :create, :destroy]
+  end
   resources :health_statuses
 
 

@@ -29,6 +29,16 @@ class GoalsController < ApplicationController
     redirect_to goals_path
   end
 
+  def complete_now
+    respond_to do |format|
+      format.json do
+        @goal = current_user.goals.find(params[:id])
+        @goal.goal_activities.create(performed_at: Time.current)
+        render json: @goal.goal_activities.last
+      end
+    end
+  end
+
   private
   def goal_params
     params.require(:goal).permit(:name, :frequency, :description)
