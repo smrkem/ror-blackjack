@@ -1,0 +1,22 @@
+<% if @errors.present? %>
+  <div class="form-errors">
+    <ul class="alert alert-danger">
+      <% @errors.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_for [@goal, @goal_activity], remote: true do |f| %>
+  <h1>I completed <%= @goal.name %> on:</h1>
+
+
+  <div class="form-group">
+    <%= f.date_field :performed_at, max: Date.today %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

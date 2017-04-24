@@ -31,13 +31,6 @@ $( function() {
     firstHistory.addClass('opened').css('height', firstHistory[0].scrollHeight + 'px');
   }
 
-  // Stuff to do on the modal Edit / Add screen.
-  $("#modal-background").click( function() {
-    $("#modal").fadeOut('fast', function() {
-      $("#modal-content").empty();
-    });
-  });
-
 });
 
 function getHealthStatusData(start_date) {

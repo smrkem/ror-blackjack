@@ -7,7 +7,7 @@ if user = User.find_by_email("seed@example.com")
   user.health_statuses.delete_all
 else
   puts "Creating User seed"
-  user = User.create(email: "seed@example.com", password: "password", password_confirmation: "password")
+  user = User.create(email: "seed@example.com", password: "password", password_confirmation: "password", email_confirmed_at: Time.current)
 end
 
 puts "Creating HealthStatuses for seed"
@@ -32,7 +32,7 @@ if user = User.find_by_email("longseed@example.com")
   user.health_statuses.delete_all
 else
   puts "Creating User longseed"
-  user = User.create(email: "longseed@example.com", password: "password", password_confirmation: "password")
+  user = User.create(email: "longseed@example.com", password: "password", password_confirmation: "password", email_confirmed_at: Time.current)
 end
 
 puts "Creating HealthStatuses for longseed"

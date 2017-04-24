@@ -5,8 +5,8 @@ class HealthStatusFlowsTest < ActionDispatch::IntegrationTest
     @user = User.create!(email: "test_user_1@example.com", password: "password", password_confirmation: "password",  email_confirmed_at: Time.now)
   end
 
-  test "can input a status on the homepage" do
-    get root_path(as: @user)
+  test "can input a status on the new page" do
+    get new_health_status_path(as: @user)
     assert_response :success
     assert_select "form" do
       assert_select "input[name=?]", "health_status[mindfulness]"
