@@ -10,7 +10,7 @@ $goal_didit: #5cb85c;
 }
 
 #my_goals_list li.goal {
-  margin: 5px 0;
+  margin: 10px 0;
   position: relative;
 
 }
@@ -18,7 +18,7 @@ $goal_didit: #5cb85c;
 #my_goals_list li.goal > a {
   @include clearfix;
 
-  padding: 5px 10px;
+  padding: 8px 10px;
   border: 1px solid #aaa;
   display: block;
   margin-right: 60px;
