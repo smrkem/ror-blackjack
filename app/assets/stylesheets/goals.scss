@@ -1,0 +1,24 @@
+#my_goals_list {
+  list-style: none;
+  padding: 0;
+  margin: 15px 0;
+}
+
+#my_goals_list li.goal {
+  padding: 5px 10px;
+  margin: 5px 0;
+  border: 1px solid #aaa;
+  border-radius: 20px;
+  position: relative;
+}
+
+#my_goals_list .complete_now_button {
+  height: 100%;
+  width: 60px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: block;
+  border-radius: 0 20px 20px 0;
+  border: 0;
+}
