@@ -37,4 +37,13 @@ class GoalTest < ActiveSupport::TestCase
     assert_not @goal.valid?
     assert_equal true, @goal.errors.full_messages.include?("Frequency must be less than or equal to 100")
   end
+
+  test "can get completions for the current week" do
+    @goal.goal_activities.destroy_all
+    @goal.goal_activities.create(performed_at: Date.today.beginning_of_week - 1)
+    @goal.goal_activities.create(performed_at: Date.today.beginning_of_week)
+    @goal.goal_activities.create(performed_at: Date.today.beginning_of_week)
+
+    assert_equal @goal.completions, 2
+  end
 end

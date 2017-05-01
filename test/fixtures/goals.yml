@@ -3,7 +3,7 @@
 one:
   name: 'Test Goal 1'
   description: MyText
-  frequency: 1
+  frequency: 5
   user: one
 
 two:

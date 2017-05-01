@@ -1,7 +1,7 @@
 <li id="<%= dom_id(goal) %>" class="goal">
   <%= link_to goal do %>
     <span class="goal-name"><%= goal.name %></span>
-    <span class="goal-frequency"><%= number_to_human(goal.frequency) %> times per week</span>
+    <span class="completion_count"><%= "#{goal.completions}/#{number_to_human(goal.frequency)}" %></span>
   <% end %>
   <button type="button" class="complete_now_button" data-url="<%= complete_now_goal_path(goal) %>">Did It</button>
 </li>
