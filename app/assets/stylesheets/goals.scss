@@ -1,3 +1,8 @@
+@import "bootstrap";
+
+$goal_bg: #337ab7;
+$goal_didit: #5cb85c;
+
 #my_goals_list {
   list-style: none;
   padding: 0;
@@ -5,11 +10,26 @@
 }
 
 #my_goals_list li.goal {
-  padding: 5px 10px;
   margin: 5px 0;
-  border: 1px solid #aaa;
-  border-radius: 20px;
   position: relative;
+
+}
+
+#my_goals_list li.goal > a {
+  @include clearfix;
+
+  padding: 5px 10px;
+  border: 1px solid #aaa;
+  display: block;
+  margin-right: 60px;
+  border-radius: 20px 0 0 20px;
+  background: $goal_bg;
+  color: #fff;
+  text-decoration: none;
+}
+#my_goals_list li.goal > a:hover {
+  background: darken($goal_bg, 5%);
+  text-decoration: none;
 }
 
 #my_goals_list .complete_now_button {
@@ -21,4 +41,26 @@
   display: block;
   border-radius: 0 20px 20px 0;
   border: 0;
+  background: $goal_didit;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+#my_goals_list .complete_now_button:hover {
+  background: darken($goal_didit, 5%);
+}
+
+#my_goals_list .goal .goal-name {
+  width: 200px;
+  display: block;
+  float: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 120%;
+}
+
+#my_goals_list .goal .completion_count {
+  display: block;
+  float: right;
 }
