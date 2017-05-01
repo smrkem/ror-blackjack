@@ -34,7 +34,7 @@ class GoalsController < ApplicationController
       format.json do
         @goal = current_user.goals.find(params[:id])
         @goal.goal_activities.create(performed_at: Time.current)
-        render json: @goal.goal_activities.last
+        render json: { goal_completes: @goal.completions }
       end
     end
   end
