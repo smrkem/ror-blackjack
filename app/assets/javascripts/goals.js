@@ -13,7 +13,11 @@ $( function() {
         console.log(data);
         goal.fadeOut('fast', function() {
           $(this).find(".goal_completes").text(data.goal_completes);
-          $(this).fadeIn('fast');
+          $(this).fadeIn('fast', function() {
+            if (data.goal_completed) {
+              $(this).addClass("completed-goal");
+            }
+          });
         });
       },
       error: function() {

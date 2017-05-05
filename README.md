@@ -17,3 +17,17 @@ The app:
 
 
 Built with model, controller and integration tests (TDD).  
+
+### ToDo's
+***
+- update this README with accurate description
+
+#### Goals
+- focus name box on Add New Goal click
+- add complete_by type goals for "ToDo items"
+
+#### HealthStatus
+- fix x axis labels
+- better style health_statuses report
+- move user into fixtures/factories and clean up tests ??
+- add previous statuses

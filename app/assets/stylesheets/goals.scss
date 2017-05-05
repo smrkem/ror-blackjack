@@ -26,10 +26,20 @@ $goal_didit: #5cb85c;
   background: $goal_bg;
   color: #fff;
   text-decoration: none;
+
+  transition: background 2s ease;
+  -webkit-transition: background 2s ease;
 }
 #my_goals_list li.goal > a:hover {
   background: darken($goal_bg, 5%);
   text-decoration: none;
+}
+
+#my_goals_list li.completed-goal > a {
+  background: $goal_didit;
+}
+#my_goals_list li.completed-goal > a:hover {
+  background: darken($goal_didit, 5%);
 }
 
 #my_goals_list .complete_now_button {

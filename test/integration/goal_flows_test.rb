@@ -16,7 +16,7 @@ class GoalFlowsTest < ActionDispatch::IntegrationTest
   test "index for user shows finished goals as complete" do
     complete_weekly_goal(@goal)
     get goals_path(as: @user)
-    assert_select "li.goal.completed .goal-name", @goal.name
+    assert_select "li.goal.completed-goal .goal-name", @goal.name
 
   end
 

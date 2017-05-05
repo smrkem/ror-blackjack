@@ -1,4 +1,4 @@
-<li id="<%= dom_id(goal) %>" class="goal <%= "completed" if goal.week_completed? %>">
+<li id="<%= dom_id(goal) %>" class="goal <%= "completed-goal" if goal.week_completed? %>">
   <%= link_to goal do %>
     <span class="goal-name"><%= goal.name %></span>
     <span class="completion_count">
