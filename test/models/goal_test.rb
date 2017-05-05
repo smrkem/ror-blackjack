@@ -46,4 +46,13 @@ class GoalTest < ActiveSupport::TestCase
 
     assert_equal @goal.completions, 2
   end
+
+
+  test "week_completed? should return true if finished or false" do
+    assert_not @goal.week_completed?
+    complete_weekly_goal(@goal)
+
+    assert @goal.week_completed?
+  end
+
 end

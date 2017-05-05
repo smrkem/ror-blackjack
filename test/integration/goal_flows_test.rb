@@ -12,6 +12,14 @@ class GoalFlowsTest < ActionDispatch::IntegrationTest
     assert_select "li.goal", { count: 0, text: goals(:two).name }
   end
 
+
+  test "index for user shows finished goals as complete" do
+    complete_weekly_goal(@goal)
+    get goals_path(as: @user)
+    assert_select "li.goal.completed .goal-name", @goal.name
+
+  end
+
   test "index shows goal completion for the week" do
     @goal.goal_activities.destroy_all
     @goal.goal_activities.create(performed_at: Date.today.beginning_of_week - 1)

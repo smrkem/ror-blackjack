@@ -9,4 +9,8 @@ class Goal < ApplicationRecord
   def completions
     self.goal_activities.where("performed_at >= ?", Date.today.beginning_of_week).count
   end
+
+  def week_completed?
+    self.completions >= self.frequency
+  end
 end

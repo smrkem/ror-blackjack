@@ -8,3 +8,10 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
 end
+
+
+def complete_weekly_goal(goal)
+  goal.frequency.times do
+      goal.goal_activities.create(performed_at: Time.current)
+  end
+end
