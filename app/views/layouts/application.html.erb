@@ -22,7 +22,7 @@
             </button>
             <%= link_to "TrackMe", root_path, class: "navbar-brand" %>
             <% if signed_in? %>
-              <p class="pull-right" style="padding: 15px;"><%= current_user.email %></p>
+              <p class="pull-right" style="padding: 15px;"><%= link_to current_user.email, my_settings_path %></p>
             <% end %>
           </div>
 
