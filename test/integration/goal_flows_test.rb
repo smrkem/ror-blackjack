@@ -6,14 +6,14 @@ class GoalFlowsTest < ActionDispatch::IntegrationTest
     @goal = goals(:one)
   end
 
-  test "index for user shows list of their own goals" do
+  test "index for goals shows list of user's own goals" do
     get goals_path(as: @user)
     assert_select "li.goal .goal-name", "Test Goal 1"
     assert_select "li.goal", { count: 0, text: goals(:two).name }
   end
 
 
-  test "index for user shows finished goals as complete" do
+  test "index for goals shows finished goals as complete" do
     complete_weekly_goal(@goal)
     get goals_path(as: @user)
     assert_select "li.goal.completed-goal .goal-name", @goal.name
