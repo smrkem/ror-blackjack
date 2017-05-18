@@ -28,7 +28,7 @@ Built with model, controller and integration tests (TDD).
 
 ***
 ### ToDo's
-- use js to detect timezone on user sign_up, or offer input choice
+- fix unit tests for health_statuses to use fixtures properly
 
 #### Goals
 - focus name box on Add New Goal click
