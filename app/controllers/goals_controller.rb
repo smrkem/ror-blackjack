@@ -21,6 +21,21 @@ class GoalsController < ApplicationController
 
   def show
     @goal = current_user.goals.find(params[:id])
+    @previous_activity = @goal.goal_activities.by_week
+  end
+
+  def edit
+    @goal = current_user.goals.find(params[:id])
+  end
+
+  def update
+    @goal = current_user.goals.find(params[:id])
+    if @goal.update_attributes(goal_params)
+      render 'update'
+    else
+      @errors = @goal.errors.full_messages
+      render 'edit'
+    end
   end
 
   def destroy

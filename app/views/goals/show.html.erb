@@ -1,14 +1,21 @@
-<h1>Goal: <%= @goal.name %></h1>
-<h3><em><%= @goal.frequency %> times per week</em></h3>
-<p><%= link_to "Delete Goal", @goal, method: :delete, data: {confirm: "Are you sure you want to permanently remove the #{@goal.name} goal?"} %></p>
+<h1>Goal: <span id="goal_name"><%= @goal.name %></span></h1>
+<h3><em><span id="goal_frequency"><%= @goal.frequency %></span> times per week</em></h3>
+<p>
+  <%= link_to "Edit Goal", edit_goal_path(@goal), class: "btn btn-default", remote: true %>
+  <%= link_to "Delete Goal", @goal, class: "btn btn-default", method: :delete, data: {confirm: "Are you sure you want to permanently remove the #{@goal.name} goal?"} %>
+</p>
 <hr>
 <h2>Goal Completion History</h2>
 <%= link_to "Add Previous Goal Activity", new_goal_goal_activity_path(@goal), class: "btn btn-default", remote: true %>
 
-<% if @goal.goal_activities.present? %>
-  <ul id="goal-completions">
-    <%= render @goal.goal_activities %>
-  </ul>
+<% if @previous_activity.present? %>
+  <% @previous_activity.each do |week, completions| %>
+    <ul id="goal-completions">
+      <% completions.each do |completion| %>
+        <%= render partial: "goal_activities/goal_activity", locals: { goal_activity: completion } %>
+      <% end %>
+    </ul>
+  <% end %>
 <% else %>
   <p>You have no completions for <span class="goal-name"><%= @goal.name %> yet.</p>
 <% end %>

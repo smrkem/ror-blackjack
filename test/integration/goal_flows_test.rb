@@ -23,7 +23,7 @@ class GoalFlowsTest < ActionDispatch::IntegrationTest
   test "index shows finished goals as complete" do
     complete_weekly_goal(@goal)
     get goals_path(as: @user)
-    
+
     assert_select "li.goal.completed-goal .goal-name", @goal.name
   end
 
@@ -68,6 +68,10 @@ class GoalFlowsTest < ActionDispatch::IntegrationTest
   test "can edit a goal from the show page" do
     get goal_path(@goal, as: @user)
     assert_select "a[href=?][data-remote=\"true\"]", edit_goal_path(@goal), "Edit Goal"
+
+    get edit_goal_path(@goal, as: @user), xhr: true
+    assert_response :success
+    assert_equal "text/javascript", @response.content_type
 
     patch goal_path(@goal, as: @user), xhr: true,
       params: { goal: { name: "edited goal", frequency: 4, description: "edited goal description" } }

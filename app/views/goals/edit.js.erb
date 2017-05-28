@@ -1,0 +1,3 @@
+$("#modal-content").empty();
+$("#modal-content").append("<%= escape_javascript(render partial: 'form') %>");
+$("#modal").fadeIn('fast');
