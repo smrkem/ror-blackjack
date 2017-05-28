@@ -6,18 +6,25 @@ class GoalFlowsTest < ActionDispatch::IntegrationTest
     @goal = goals(:one)
   end
 
-  test "index for user shows list of their own goals" do
+  test "index shows list of user's own goals" do
     get goals_path(as: @user)
+
     assert_select "li.goal .goal-name", "Test Goal 1"
     assert_select "li.goal", { count: 0, text: goals(:two).name }
   end
 
+  test "index links to user's completed goals" do
+    get goals_path(as: @user)
 
-  test "index for user shows finished goals as complete" do
+    assert_select "a[href=?]", previous_goals_path, "Previous Goals"
+    assert false, "finish checking for previous goals at previous_goals_path"
+  end
+
+  test "index shows finished goals as complete" do
     complete_weekly_goal(@goal)
     get goals_path(as: @user)
+    
     assert_select "li.goal.completed-goal .goal-name", @goal.name
-
   end
 
   test "index shows goal completion for the week" do
@@ -57,4 +64,18 @@ class GoalFlowsTest < ActionDispatch::IntegrationTest
     assert_select ".alert", "#{@goal.name} has been removed."
     assert_equal @user.goals.count, 0
   end
+
+  test "can edit a goal from the show page" do
+    get goal_path(@goal, as: @user)
+    assert_select "a[href=?][data-remote=\"true\"]", edit_goal_path(@goal), "Edit Goal"
+
+    patch goal_path(@goal, as: @user), xhr: true,
+      params: { goal: { name: "edited goal", frequency: 4, description: "edited goal description" } }
+    assert_response :success
+    assert_equal "text/javascript", @response.content_type
+
+    @goal.reload
+    assert_equal "edited goal", @goal.name
+  end
+
 end
