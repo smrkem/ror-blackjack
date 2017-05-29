@@ -15,8 +15,10 @@ Rails.application.routes.draw do
   end
 
   get "/confirm_email/:token" => "email_confirmations#update", as: "confirm_email"
+
   get "/my-settings" => "users#edit", as: "my_settings"
   patch "/my-settings" => "users#update", as: "update_settings"
 
+  get "/previous-goals" => "goals#previous_goals", as: "previous_goals"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -13,11 +13,22 @@ class GoalFlowsTest < ActionDispatch::IntegrationTest
     assert_select "li.goal", { count: 0, text: goals(:two).name }
   end
 
-  test "index links to user's completed goals" do
+  test "index only shows active goals" do
+    @goal.update_attributes({ deleted_at: Time.current })
     get goals_path(as: @user)
 
+    assert_select "li.goal", { count: 0, text: @goal.name }
+  end
+
+  test "index links to user's completed goals" do
+    get goals_path(as: @user)
     assert_select "a[href=?]", previous_goals_path, "Previous Goals"
-    assert false, "finish checking for previous goals at previous_goals_path"
+
+    @goal.update_attributes({ deleted_at: Time.current })
+    get previous_goals_path(as: @user)
+    assert_response :success
+
+    assert_select "li.previous_goal .goal-name", @goal.name
   end
 
   test "index shows finished goals as complete" do
@@ -55,6 +66,8 @@ class GoalFlowsTest < ActionDispatch::IntegrationTest
     assert_equal @user.goals.count, 1
     get goal_path(@goal, as: @user)
     assert_response :success
+
+    assert false, "update test to ajax delete / destroy ?"
     assert_select "a[href=?][data-method=\"delete\"]", goal_path(@goal), "Delete Goal"
 
     delete goal_path(@goal, as: @user)

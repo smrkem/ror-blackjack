@@ -38,6 +38,17 @@ class GoalTest < ActiveSupport::TestCase
     assert_equal true, @goal.errors.full_messages.include?("Frequency must be less than or equal to 100")
   end
 
+  test "should be valid without deleted_at" do
+    @goal.deleted_at = nil
+    assert @goal.valid?
+  end
+
+  test "deleted_at must be in the past" do
+    @goal.deleted_at = 2.days.from_now
+    assert_not @goal.valid?
+    assert @goal.errors.full_messages.include?("Deleted at can't be in the future")
+  end
+
   test "can get completions for the current week" do
     @goal.goal_activities.destroy_all
     @goal.goal_activities.create(performed_at: Date.today.beginning_of_week - 1)
