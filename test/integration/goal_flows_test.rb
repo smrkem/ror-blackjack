@@ -20,7 +20,7 @@ class GoalFlowsTest < ActionDispatch::IntegrationTest
     assert_select "li.goal .goal-name", { count: 0, text: @goal.name }
   end
 
-  test "index links to user's completed goals" do
+  test "index links to user's deactivated goals" do
     get goals_path(as: @user)
     assert_select "a[href=?]", previous_goals_path, "Previous Goals"
 
@@ -92,6 +92,29 @@ class GoalFlowsTest < ActionDispatch::IntegrationTest
 
     @goal.reload
     assert_equal "edited goal", @goal.name
+  end
+
+  test "can permanently delete a goal from previous goals page" do
+    total_goals = @user.goals.count
+    @goal.update_attributes({ deleted_at: Time.current })
+    get previous_goals_path(as: @user)
+
+    assert_select "a[href=?][data-method=\"delete\"]", goal_path(@goal), "Permanently Delete Goal"
+
+    delete goal_path(@goal)
+    assert_redirected_to previous_goals_path
+
+    assert_equal @user.goals.count, total_goals - 1
+  end
+
+  test "can reactivate a goal from previous goals page" do
+    @goal.update_attributes({ deleted_at: Time.current })
+    assert_equal 1, @user.inactive_goals.count
+    get previous_goals_path(as: @user)
+
+    assert_select "#goal_#{@goal.id} button.reactivate_goal_button", "Reactivate Goal"
+
+    assert_equal 0, @user.inactive_goals.count
   end
 
 end

@@ -12,7 +12,7 @@ $goal_didit: #5cb85c;
 #my_goals_list li.goal {
   margin: 10px 0;
   position: relative;
-
+  overflow: hidden;
 }
 
 #my_goals_list li.goal > a {

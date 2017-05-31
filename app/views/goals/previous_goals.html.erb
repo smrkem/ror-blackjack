@@ -5,9 +5,12 @@
     <li>You have no previous goals.</li>
   <% else %>
     <% @goals.each do |goal| %>
-      <li class="previous_goal goal">
+      <li id="<%= dom_id(goal) %>" class="previous_goal goal">
         <span class="goal-name"><%= goal.name %></span>
-        <div class="goal-actions pull-right"></div>
+        <div class="goal-actions pull-right">
+          <button class="reactivate_goal_button btn btn-default">Reactivate Goal</button>
+          <%= link_to "Permanently Delete Goal", goal, class: "btn btn-default", method: :delete, data: {confirm: "Are you sure you want to permanently delete #{goal.name}? (This action can't be undone)"} %>
+        </div>
       </li>
     <% end %>
   <% end %>
