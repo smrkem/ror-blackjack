@@ -2,7 +2,11 @@ class GoalsController < ApplicationController
   before_action :require_login
 
   def index
-    @goals = current_user.goals
+    @goals = current_user.active_goals
+  end
+
+  def previous_goals
+    @goals = current_user.inactive_goals
   end
 
   def new
@@ -30,6 +34,7 @@ class GoalsController < ApplicationController
 
   def update
     @goal = current_user.goals.find(params[:id])
+
     if @goal.update_attributes(goal_params)
       render 'update'
     else
@@ -52,6 +57,13 @@ class GoalsController < ApplicationController
         render json: { goal_completes: @goal.completions, goal_completed: @goal.week_completed? }
       end
     end
+  end
+
+  def deactivate
+    @goal = current_user.goals.find(params[:id])
+    @goal.deactivate
+    flash[:notice] = "#{@goal.name} has been removed."
+    redirect_to goals_path
   end
 
   private

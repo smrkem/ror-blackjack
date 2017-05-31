@@ -31,6 +31,7 @@ Built with model, controller and integration tests (TDD).
 - use js to detect timezone on user sign_up, or offer input choice
 
 #### Goals
+- Deactivating a goal should set new goal field "active" to false
 - focus name box on Add New Goal click
 - Goal Activities should be returned by performed_at DESC
 - add complete_by type goals for "ToDo items"

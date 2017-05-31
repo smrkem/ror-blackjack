@@ -58,6 +58,12 @@ class GoalTest < ActiveSupport::TestCase
     assert_equal @goal.completions, 2
   end
 
+  test "deactivate should set deleted_at" do
+    assert_nil @goal.deleted_at
+    @goal.deactivate
+
+    assert_not @goal.deleted_at.nil?
+  end
 
   test "week_completed? should return true if finished or false" do
     assert_not @goal.week_completed?

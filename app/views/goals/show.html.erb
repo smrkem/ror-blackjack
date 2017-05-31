@@ -2,7 +2,7 @@
 <h3><em><span id="goal_frequency"><%= @goal.frequency %></span> times per week</em></h3>
 <p>
   <%= link_to "Edit Goal", edit_goal_path(@goal), class: "btn btn-default", remote: true %>
-  <%= link_to "Delete Goal", @goal, class: "btn btn-default", method: :delete, data: {confirm: "Are you sure you want to permanently remove the #{@goal.name} goal?"} %>
+  <%= link_to "Delete Goal", deactivate_goal_path(@goal), class: "btn btn-default", data: {confirm: "Are you sure you want to deactivate #{@goal.name}? (Previous goals can be reactivated from your previous goals page)"} %>
 </p>
 <hr>
 <h2>Goal Completion History</h2>

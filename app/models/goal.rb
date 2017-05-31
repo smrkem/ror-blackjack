@@ -9,7 +9,7 @@ class Goal < ApplicationRecord
   validate :deleted_at_cannot_be_future
 
   def deleted_at_cannot_be_future
-    if deleted_at.present? && deleted_at > Time.current
+    if deleted_at.present? && deleted_at > Time.now
       errors.add(:deleted_at, "can't be in the future")
     end
   end
@@ -20,5 +20,10 @@ class Goal < ApplicationRecord
 
   def week_completed?
     self.completions >= self.frequency
+  end
+
+  def deactivate
+    self.deleted_at = Time.now
+    save
   end
 end

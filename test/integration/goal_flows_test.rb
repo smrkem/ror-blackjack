@@ -9,15 +9,15 @@ class GoalFlowsTest < ActionDispatch::IntegrationTest
   test "index shows list of user's own goals" do
     get goals_path(as: @user)
 
-    assert_select "li.goal .goal-name", "Test Goal 1"
-    assert_select "li.goal", { count: 0, text: goals(:two).name }
+    assert_select "li.goal .goal-name", {count: 1, text: "Test Goal 1" }
+    assert_select "li.goal .goal-name", {count: 0, text: goals(:two).name }
   end
 
   test "index only shows active goals" do
     @goal.update_attributes({ deleted_at: Time.current })
     get goals_path(as: @user)
 
-    assert_select "li.goal", { count: 0, text: @goal.name }
+    assert_select "li.goal .goal-name", { count: 0, text: @goal.name }
   end
 
   test "index links to user's completed goals" do
@@ -63,19 +63,18 @@ class GoalFlowsTest < ActionDispatch::IntegrationTest
   end
 
   test "can delete a goal from the show page" do
-    assert_equal @user.goals.count, 1
+    assert_equal @user.active_goals.count, 1
     get goal_path(@goal, as: @user)
     assert_response :success
+    assert_select "a[href=?]", deactivate_goal_path(@goal), "Delete Goal"
 
-    assert false, "update test to ajax delete / destroy ?"
-    assert_select "a[href=?][data-method=\"delete\"]", goal_path(@goal), "Delete Goal"
-
-    delete goal_path(@goal, as: @user)
-
+    get deactivate_goal_path(@goal), as: @user
     assert_redirected_to goals_path
     follow_redirect!
+
+    assert_select "li#goal_#{@goal.id}", false
     assert_select ".alert", "#{@goal.name} has been removed."
-    assert_equal @user.goals.count, 0
+    assert_equal @user.active_goals.count, 0
   end
 
   test "can edit a goal from the show page" do

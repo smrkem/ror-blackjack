@@ -1,0 +1,14 @@
+<h1>Previous Goals</h1>
+
+<ul id="my_goals_list">
+  <% if @goals.empty? %>
+    <li>You have no previous goals.</li>
+  <% else %>
+    <% @goals.each do |goal| %>
+      <li class="previous_goal goal">
+        <span class="goal-name"><%= goal.name %></span>
+        <div class="goal-actions pull-right"></div>
+      </li>
+    <% end %>
+  <% end %>
+</ul>
