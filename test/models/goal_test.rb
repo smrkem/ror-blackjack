@@ -38,15 +38,9 @@ class GoalTest < ActiveSupport::TestCase
     assert_equal true, @goal.errors.full_messages.include?("Frequency must be less than or equal to 100")
   end
 
-  test "should be valid without deleted_at" do
-    @goal.deleted_at = nil
-    assert @goal.valid?
-  end
-
-  test "deleted_at must be in the past" do
-    @goal.deleted_at = 2.days.from_now
-    assert_not @goal.valid?
-    assert @goal.errors.full_messages.include?("Deleted at can't be in the future")
+  test "should be active by default" do
+    new_goal = Goal.create(name: 'test goal', user: users(:one), frequency: 1)
+    assert new_goal.active
   end
 
   test "can get completions for the current week" do
@@ -58,11 +52,11 @@ class GoalTest < ActiveSupport::TestCase
     assert_equal @goal.completions, 2
   end
 
-  test "deactivate should set deleted_at" do
-    assert_nil @goal.deleted_at
+  test "deactivate should set active to false" do
+    assert @goal.active
     @goal.deactivate
 
-    assert_not @goal.deleted_at.nil?
+    assert_not @goal.active
   end
 
   test "week_completed? should return true if finished or false" do
@@ -70,6 +64,22 @@ class GoalTest < ActiveSupport::TestCase
     complete_weekly_goal(@goal)
 
     assert @goal.week_completed?
+  end
+
+  test "can get active goals" do
+    @goal2 = goals(:two)
+    @goal2.deactivate
+
+    assert Goal.all.active.include? @goal
+    assert_not Goal.all.active.include? @goal2
+  end
+
+  test "can get inactive goals" do
+    @goal2 = goals(:two)
+    @goal2.deactivate
+
+    assert_not Goal.all.inactive.include? @goal
+    assert Goal.all.inactive.include? @goal2
   end
 
 end

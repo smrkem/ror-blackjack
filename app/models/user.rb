@@ -12,11 +12,4 @@ class User < ApplicationRecord
     save
   end
 
-  def active_goals
-    self.goals.where(deleted_at: nil)
-  end
-
-  def inactive_goals
-    self.goals.where.not(deleted_at: nil)
-  end
 end

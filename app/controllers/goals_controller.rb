@@ -2,11 +2,11 @@ class GoalsController < ApplicationController
   before_action :require_login
 
   def index
-    @goals = current_user.active_goals
+    @goals = current_user.goals.active
   end
 
-  def previous_goals
-    @goals = current_user.inactive_goals
+  def inactive_goals
+    @goals = current_user.goals.inactive
   end
 
   def new
@@ -46,7 +46,7 @@ class GoalsController < ApplicationController
   def destroy
     @goal = current_user.goals.find(params[:id]).destroy
     flash[:notice] = "#{@goal.name} has been removed."
-    redirect_to previous_goals_path
+    redirect_to inactive_goals_path
   end
 
   def complete_now

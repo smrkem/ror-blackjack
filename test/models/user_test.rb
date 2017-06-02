@@ -14,18 +14,4 @@ class UserTest < ActiveSupport::TestCase
 
     assert_equal false, user.email_confirmed_at.nil?
   end
-
-  test "active_goals returns all goals with deleted_at nil" do
-    assert_equal @user.active_goals.count, 1
-    @goal.update_attributes({ deleted_at: Time.current })
-
-    assert_equal @user.active_goals.count, 0
-  end
-
-  test "inactive_goals returns all goals with deleted_at nil" do
-    assert_equal @user.inactive_goals.count, 0
-    @goal.update_attributes({ deleted_at: Time.current })
-
-    assert_equal @user.inactive_goals.count, 1
-  end
 end
