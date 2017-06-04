@@ -45,8 +45,8 @@ class GoalsController < ApplicationController
 
   def destroy
     @goal = current_user.goals.find(params[:id]).destroy
-    flash[:notice] = "#{@goal.name} has been removed."
-    redirect_to inactive_goals_path
+    flash[:notice] = "#{@goal.name} has been deleted."
+    redirect_to goals_path
   end
 
   def complete_now

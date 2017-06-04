@@ -20,17 +20,6 @@ class GoalFlowsTest < ActionDispatch::IntegrationTest
     assert_select "li.goal .goal-name", { count: 0, text: @goal.name }
   end
 
-  test "index links to user's deactivated goals" do
-    get goals_path(as: @user)
-    assert_select "a[href=?]", inactive_goals_path, "Inactive Goals"
-
-    @goal.update_attributes({ active: false })
-    get inactive_goals_path(as: @user)
-    assert_response :success
-
-    assert_select "li.inactive_goal .goal-name", @goal.name
-  end
-
   test "index shows finished goals as complete" do
     complete_weekly_goal(@goal)
     get goals_path(as: @user)
@@ -62,20 +51,39 @@ class GoalFlowsTest < ActionDispatch::IntegrationTest
     assert @user.goals.pluck(:name).include?("some goal")
   end
 
-  test "can make a goal inactive from the show page" do
-    assert_equal @user.goals.active.count, 1
-    get goal_path(@goal, as: @user)
-    assert_response :success
-    assert_select "label.switch#deactivate_goal", "Make Inactive"
-    assert false, "Alter tests to submit ajax active field"
+  test "index links to user's deactivated goals" do
+    get goals_path(as: @user)
+    assert_select "a[href=?]", inactive_goals_path, "Inactive Goals"
 
-    get deactivate_goal_path(@goal), as: @user
+    @goal.update_attributes({ active: false })
+    get inactive_goals_path(as: @user)
+    assert_response :success
+
+    assert_select "li.inactive_goal .goal-name", @goal.name
+  end
+
+  test "can deactivate a goal from the show page" do
+    assert_equal 0, @user.goals.inactive.count
+
+    get goal_path(@goal, as: @user)
+    assert_select "#goal_#{@goal.id} button.reactivate_goal_button", "Reactivate Goal"
+
+    assert_equal 1, @user.goals.inactive.count
+  end
+
+  test "can permanently delete a goal from the show page" do
+    total_goals = @user.goals.count
+    @goal.update_attributes({ active: false })
+    get goal_path(@goal, as: @user)
+
+    assert_select "a[href=?][data-method=\"delete\"]", goal_path(@goal), "Permanently Delete Goal"
+
+    delete goal_path(@goal)
     assert_redirected_to goals_path
     follow_redirect!
+    assert_select ".alert", "#{@goal.name} has been deleted."
 
-    assert_select "li#goal_#{@goal.id}", false
-    assert_select ".alert", "#{@goal.name} has been deactivated."
-    assert_equal @user.goals.active.count, 0
+    assert_equal @user.goals.count, total_goals - 1
   end
 
   test "can edit a goal from the show page" do
@@ -101,20 +109,6 @@ class GoalFlowsTest < ActionDispatch::IntegrationTest
     get inactive_goals_path(as: @user)
 
     assert_select "li#goal_#{@goal.id} a[href=?] .goal-name", goal_path(@goal), @goal.name
-    assert false, "Style it!!!"
-  end
-
-  test "can permanently delete a goal from inactive goals page" do
-    total_goals = @user.goals.count
-    @goal.update_attributes({ active: false })
-    get inactive_goals_path(as: @user)
-
-    assert_select "a[href=?][data-method=\"delete\"]", goal_path(@goal), "Permanently Delete Goal"
-
-    delete goal_path(@goal)
-    assert_redirected_to inactive_goals_path
-
-    assert_equal @user.goals.count, total_goals - 1
   end
 
   test "can reactivate a goal from previous goals page" do
@@ -122,7 +116,6 @@ class GoalFlowsTest < ActionDispatch::IntegrationTest
     assert_equal 1, @user.goals.inactive.count
     get inactive_goals_path(as: @user)
 
-    assert_select "#goal_#{@goal.id} button.reactivate_goal_button", "Reactivate Goal"
 
     assert_equal 0, @user.goals.inactive.count
   end

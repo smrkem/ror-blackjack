@@ -2,20 +2,22 @@
 
 $goal_bg: #337ab7;
 $goal_didit: #5cb85c;
+$inactive_goal_bg: #aaa;
 
-#my_goals_list {
+.goals_list {
   list-style: none;
   padding: 0;
   margin: 15px 0;
 }
 
-#my_goals_list li.goal {
+.goals_list li.goal {
   margin: 10px 0;
   position: relative;
   overflow: hidden;
 }
 
-#my_goals_list li.goal > a {
+
+.goals_list li.goal > a {
   @include clearfix;
 
   padding: 8px 10px;
@@ -27,22 +29,23 @@ $goal_didit: #5cb85c;
   color: #fff;
   text-decoration: none;
 
-  transition: background 2s ease;
-  -webkit-transition: background 2s ease;
 }
-#my_goals_list li.goal > a:hover {
+.goals_list li.goal > a:hover {
   background: darken($goal_bg, 5%);
   text-decoration: none;
 }
 
-#my_goals_list li.completed-goal > a {
+#weekly_goals_list li.completed-goal > a {
   background: $goal_didit;
+
+  transition: background 2s ease;
+  -webkit-transition: background 2s ease;
 }
-#my_goals_list li.completed-goal > a:hover {
+#weekly_goals_list li.completed-goal > a:hover {
   background: darken($goal_didit, 5%);
 }
 
-#my_goals_list .complete_now_button {
+#weekly_goals_list .complete_now_button {
   height: 100%;
   width: 60px;
   position: absolute;
@@ -56,11 +59,11 @@ $goal_didit: #5cb85c;
   text-transform: uppercase;
   font-weight: bold;
 }
-#my_goals_list .complete_now_button:hover {
+#weekly_goals_list .complete_now_button:hover {
   background: darken($goal_didit, 5%);
 }
 
-#my_goals_list .goal .goal-name {
+.goals_list .goal .goal-name {
   width: 200px;
   display: block;
   float: left;
@@ -70,7 +73,47 @@ $goal_didit: #5cb85c;
   font-size: 120%;
 }
 
-#my_goals_list .goal .completion_count {
+#weekly_goals_list .goal .completion_count {
   display: block;
   float: right;
+}
+
+
+.goals_list li.inactive_goal > a {
+  background: $inactive_goal_bg;
+  margin-right: 0;
+}
+.goals_list li.inactive_goal > a:hover {
+  background: darken($inactive_goal_bg, 5%);
+}
+
+.inactive_goal .switch {
+  position: absolute;
+  right: 3px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+
+
+
+.goal-show h3 {
+  position: relative;
+  padding-left: 70px;
+  margin: 10px 0px 20px;
+}
+
+.goal-show h3 #goal_active_toggle {
+  position: absolute;
+  left: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.goal-description {
+  border: 3px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 40px;
+  font-size: 1.2em;
 }
