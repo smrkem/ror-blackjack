@@ -135,3 +135,15 @@ $inactive_goal_bg: #aaa;
   margin-bottom: 40px;
   font-size: 1.2em;
 }
+
+form.new_goal {
+  input#goal_frequency {
+    width: 90px;
+    padding: 5px;
+    font-size: 1.2em;
+  }
+
+  textarea#goal_description {
+    height: 85px;
+  }
+}

@@ -31,8 +31,6 @@ Built with model, controller and integration tests (TDD).
 
 #### Goals
 - Add indexes to goal.active and goal_activities.performed_at
-- Deactivating a goal should set new goal field "active" to false
-- focus name box on Add New Goal click
 - add todo items
 
 #### HealthStatus
