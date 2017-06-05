@@ -3,8 +3,5 @@
     <span class="goal-name"><%= goal.name %></span>
     <span class="goal-frequency"><%= "#{goal.frequency}x per week" %></span>
   <% end %>
-  <label class="goal_active_toggle switch">
-    <input type="checkbox">
-    <div class="slider round"></div>
-  </label>
+  <%= render partial: "goal_active_toggle", locals: { goal: goal } %>
 </li>

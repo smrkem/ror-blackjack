@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :goals do
     post 'complete_now', on: :member
     get 'deactivate', on: :member, as: "deactivate"
+    patch 'set_active', on: :member
     resources :goal_activities, only: [:new, :create, :destroy]
   end
   resources :health_statuses

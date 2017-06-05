@@ -62,11 +62,27 @@ class GoalFlowsTest < ActionDispatch::IntegrationTest
     assert_select "li.inactive_goal .goal-name", @goal.name
   end
 
+  test "show page displays correct active_toggle" do
+    # when goal is active
+    get goal_path(@goal, as: @user)
+    assert_select ".goal_active_toggle.toggle_on input"
+
+    # when goal is inactive
+    @goal.update_attributes(active: false)
+    get goal_path(@goal, as: @user)
+    assert_select ".goal_active_toggle.toggle_off input"
+  end
+
   test "can deactivate a goal from the show page" do
     assert_equal 0, @user.goals.inactive.count
 
     get goal_path(@goal, as: @user)
-    assert_select "#goal_#{@goal.id} button.reactivate_goal_button", "Reactivate Goal"
+    assert_select ".goal_active_toggle.toggle_on"
+
+    patch set_active_goal_path(@goal, as: @user, format: :json),
+      params: { active: false }
+    assert_response :success
+    assert_equal "application/json", @response.content_type
 
     assert_equal 1, @user.goals.inactive.count
   end
@@ -111,13 +127,24 @@ class GoalFlowsTest < ActionDispatch::IntegrationTest
     assert_select "li#goal_#{@goal.id} a[href=?] .goal-name", goal_path(@goal), @goal.name
   end
 
-  test "can reactivate a goal from previous goals page" do
+  test "can reactivate an inactive goal" do
     @goal.update_attributes({ active: false })
     assert_equal 1, @user.goals.inactive.count
     get inactive_goals_path(as: @user)
+    assert_select "li#goal_#{@goal.id} .goal_active_toggle.toggle_off"
 
+    patch set_active_goal_path(@goal, as: @user, format: :json),
+      params: { active: true }
+    assert_response :success
+    assert_equal "application/json", @response.content_type
 
     assert_equal 0, @user.goals.inactive.count
+  end
+
+  test "inactive goals should be have active_toggle off" do
+    @goal.update_attributes(active: false)
+    get inactive_goals_path(as: @user)
+    assert_select "#goal_#{@goal.id}.inactive_goal .goal_active_toggle.toggle_off input"
   end
 
 end

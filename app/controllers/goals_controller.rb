@@ -49,6 +49,13 @@ class GoalsController < ApplicationController
     redirect_to goals_path
   end
 
+  def set_active
+    @goal = current_user.goals.find(params[:id])
+    active =  params['active'] == "true" ? true : false
+    @goal.update_attributes({active: active})
+    render json: @goal
+  end
+
   def complete_now
     respond_to do |format|
       format.json do

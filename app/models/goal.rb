@@ -17,8 +17,4 @@ class Goal < ApplicationRecord
     self.completions >= self.frequency
   end
 
-  def deactivate
-    self.active = false
-    save
-  end
 end

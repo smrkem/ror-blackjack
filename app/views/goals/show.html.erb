@@ -1,10 +1,7 @@
 <div class="goal-show">
   <h1>Goal: <span id="goal_name"><%= @goal.name %></span></h1>
   <h3>
-    <label id="goal_active_toggle" class="switch">
-      <input type="checkbox">
-      <div class="slider round"></div>
-    </label>
+    <%= render partial: "goal_active_toggle", locals: { goal: @goal } %>
     <em><span id="goal_frequency"><%= @goal.frequency %></span> times per week</em>
   </h3>
   <p class="goal-description">

@@ -52,13 +52,6 @@ class GoalTest < ActiveSupport::TestCase
     assert_equal @goal.completions, 2
   end
 
-  test "deactivate should set active to false" do
-    assert @goal.active
-    @goal.deactivate
-
-    assert_not @goal.active
-  end
-
   test "week_completed? should return true if finished or false" do
     assert_not @goal.week_completed?
     complete_weekly_goal(@goal)
@@ -68,7 +61,7 @@ class GoalTest < ActiveSupport::TestCase
 
   test "can get active goals" do
     @goal2 = goals(:two)
-    @goal2.deactivate
+    @goal2.update_attributes(active: false)
 
     assert Goal.all.active.include? @goal
     assert_not Goal.all.active.include? @goal2
@@ -76,7 +69,7 @@ class GoalTest < ActiveSupport::TestCase
 
   test "can get inactive goals" do
     @goal2 = goals(:two)
-    @goal2.deactivate
+    @goal2.update_attributes(active: false)
 
     assert_not Goal.all.inactive.include? @goal
     assert Goal.all.inactive.include? @goal2
