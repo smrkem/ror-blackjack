@@ -17,5 +17,7 @@ AHA Suggests:
 
 CDC Describes:
 
+| activity | heart rate   |
+|----------|--------------|
 | moderate | 50 - 75% max |
 | vigorous | 70 - 85% max |
