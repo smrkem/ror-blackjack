@@ -16,5 +16,7 @@ AHA Suggests:
 - 75min vigorous activity / week
 
 CDC Describes:
+| activity | heart rate   |
+|----------|--------------|
 | moderate | 50 - 75% max |
 | moderate | 70 - 85% max |
