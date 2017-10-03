@@ -12,10 +12,9 @@ services:
       - db-data:/var/lib/postgresql/db-data
 
   app:
-    build: .
+    build: ./trackmeapi
     env_file:
-      - .env
-      - .env.private
+      - ./trackmeapi/.env
     user: $UID
     volumes:
       - .:/usr/src/app
