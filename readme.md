@@ -16,6 +16,10 @@ I'll be making 2 independent apps:
 ## TrackMe API  
 This is the API that handles all the data.
 
+Following https://scotch.io/tutorials/build-a-restful-json-api-with-rails-5-part-one  
+
+
+
 I think I'd honestly prefer to make this serverless using something like dynamodb - it seems like a really good use case for digging into nosql and api patterns. But making this in rails has a few advantages as well:
 - up and running extrememly quickly
 - easy to test
@@ -52,6 +56,7 @@ $ docker run --rm -it -v $PWD/trackmeapi:/trackme ruby:2.3.1 bash
 ```
 and then from inside the container:
 ```
+# gem install rails
 # cd /trackme
 # rails new . --api -T -B
 ```
