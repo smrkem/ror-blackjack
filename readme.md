@@ -28,4 +28,31 @@ I want to build this totally TDD, and use docker locally.
 
 
 ### The 'Activity' resource  
-The api will revolve around the concept of Activities. An example of an activity would be "50 min exercise at 1:35pm Nov 15, 2017 where my average heart rate was 140".
+The api will revolve around the concept of Activities. An example of an activity would be "50 min exercise at 1:35pm Nov 15, 2017 where my average heart rate was 140". So datetime, duration and average_heart_rate - nice and simple.
+
+I *could* make an very straightforward "Exercise" model and I'm done. And that's exactly what I'll do. I have no idea what this app will ultimately become, and I know this model isn't going to extend very well to accomodate other types of activities. But I'm going to trust in the agile concepts of MVP and letting user experience drive the design.  
+
+So TrackMe API v0.1.0 will have 2 resources:
+- users
+- exercises
+
+### Creating a new project  
+My current project folder structure looks like so:
+```
+├── docker-compose.yml
+├── trackmeapi
+│   └── Dockerfile
+└── webapp
+```
+I have a folder for the front-end webapp and another for trackmeapi. Currently it only has my boilerplate Dockerfile for a rails 5, ruby 2.3 app and before using that I need to create the app and Gemfile.
+
+I can create a new ruby 2.3 container and share that folder as a volume.  
+```
+$ docker run --rm -it -v $PWD/trackmeapi:/trackme ruby:2.3.1 bash
+```
+and then from inside the container:
+```
+# cd /trackme
+# rails new . --api -T -B
+```
+(`.` to build in the current folder, `--api` to only use Rails API features, `-T` to skip-tests since I'll be using RSpec, `-B` to skip the bundle install)
