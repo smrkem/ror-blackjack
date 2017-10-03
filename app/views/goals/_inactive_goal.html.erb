@@ -1,7 +1,0 @@
-<li id="<%= dom_id(goal) %>" class="inactive_goal goal">
-  <%= link_to goal do %>
-    <span class="goal-name"><%= goal.name %></span>
-    <span class="goal-frequency"><%= "#{goal.frequency}x per week" %></span>
-  <% end %>
-  <%= render partial: "goal_active_toggle", locals: { goal: goal } %>
-</li>

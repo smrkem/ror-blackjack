@@ -1,6 +1,0 @@
-<li id="<%= dom_id(goal_activity) %>">
-  <span class=""><%= goal_activity.performed_at.strftime("%A %b %d, %Y - %l:%M%P") %></span>
-  <span class="actions pull-right">
-    <%= link_to "Delete This Activity", goal_goal_activity_path(@goal, goal_activity), method: :delete, remote: true, data: { confirm: "are you sure?" } %>
-  </span>
-</li>

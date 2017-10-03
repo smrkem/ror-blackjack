@@ -1,5 +1,0 @@
-<h1>Verify your email address on TrackMe</h1>
-<p>
-  In order to complete your account signup on TrackMe, please verify your email address by clicking on the link below.
-</p>
-<p><%= link_to "Verify", confirm_email_url(token: @user.email_confirmation_token) %></p>
