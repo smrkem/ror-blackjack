@@ -41,6 +41,10 @@ So TrackMe API v0.1.0 will have 2 resources:
 - exercises
 
 ### Creating a new project  
+I'm following my basic, boilerplate dockerized rails workflow - there's a repo with basic instructions here:  
+- https://github.com/smrkem/rails-docker
+
+
 My current project folder structure looks like so:
 ```
 ├── docker-compose.yml
