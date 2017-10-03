@@ -15,7 +15,7 @@ services:
     build: ./trackmeapi
     env_file:
       - ./trackmeapi/.env
-    user: $UID
+    user: '1000'
     volumes:
       - ./trackmeapi:/usr/src/app
     ports:
